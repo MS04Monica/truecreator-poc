@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "TrueCreator Scan",
+  "version": "1.0",
+  "description": "Media authenticity and disclosure verification tool.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8000/*",
+    "https://*.youtube.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

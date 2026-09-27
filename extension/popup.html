@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --border: #e4e4e7;
+      --border-subtle: #f4f4f5;
+      --text-main: #09090b;
+      --text-muted: #71717a;
+      --text-soft: #a1a1aa;
+      
+      --accent-dark: #18181b;
+      --accent-hover: #27272a;
+      
+      --emerald-bg: #ecfdf5;
+      --emerald-text: #047857;
+      --emerald-border: #a7f3d0;
+      
+      --amber-bg: #fffbeb;
+      --amber-text: #b45309;
+      --amber-border: #fde68a;
+      
+      --rose-bg: #fff1f2;
+      --rose-text: #be123c;
+      --rose-border: #fecdd3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      width: 340px;
+      padding: 16px;
+      background-color: var(--bg);
+      color: var(--text-main);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: -0.3px;
+      color: var(--text-main);
+    }
+
+    .brand-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      background: #f4f4f5;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      background-color: #10b981;
+      border-radius: 50%;
+    }
+
+    .btn-scan {
+      width: 100%;
+      padding: 11px;
+      background: var(--accent-dark);
+      color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      transition: all 0.15s ease;
+    }
+
+    .btn-scan:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn-scan:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .hero-score-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .gauge-container {
+      position: relative;
+      width: 104px;
+      height: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gauge-svg {
+      transform: rotate(-90deg);
+      width: 104px;
+      height: 104px;
+    }
+
+    .gauge-bg {
+      fill: none;
+      stroke: #f4f4f5;
+      stroke-width: 7;
+    }
+
+    .gauge-fill {
+      fill: none;
+      stroke: #b45309;
+      stroke-width: 7;
+      stroke-dasharray: 283;
+      stroke-dashoffset: 85;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s ease;
+    }
+
+    .score-inner {
+      position: absolute;
+      text-align: center;
+    }
+
+    .score-number {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.8px;
+      color: var(--text-main);
+    }
+
+    .score-sub {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-soft);
+      margin-top: 3px;
+    }
+
+    .badge-wrapper {
+      margin-top: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1px;
+      border: 1px solid transparent;
+    }
+
+    .badge-bot_aggregator, .badge-unverified_reupload {
+      background: var(--rose-bg);
+      color: var(--rose-text);
+      border-color: var(--rose-border);
+    }
+
+    .badge-verified_original {
+      background: var(--emerald-bg);
+      color: var(--emerald-text);
+      border-color: var(--emerald-border);
+    }
+
+    .summary-box {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 12px 0;
+      background: #f8f9fa;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .flags-header {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .flag-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 11px;
+      margin-bottom: 6px;
+    }
+
+    .flag-card.high { border-left: 3px solid #f43f5e; }
+    .flag-card.medium { border-left: 3px solid #f59e0b; }
+    .flag-card.info { border-left: 3px solid #10b981; }
+
+    .flag-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .flag-reason {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .hidden { display: none !important; }
+    
+    .error-card {
+      background: var(--rose-bg);
+      border: 1px solid var(--rose-border);
+      color: var(--rose-text);
+      font-size: 11px;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      text-align: center;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <span>TrueCreator</span>
+    </div>
+    <div class="status-pill">
+      <span class="status-dot"></span> Active
+    </div>
+  </div>
+
+  <button id="btnScan" class="btn-scan">
+    <span>Analyze Media Authenticity</span>
+  </button>
+
+  <div id="errorMsg" class="error-card hidden"></div>
+
+  <div id="resultsCard" class="card hidden">
+    <div class="hero-score-wrapper">
+      <div class="gauge-container">
+        <svg class="gauge-svg" viewBox="0 0 100 100">
+          <circle class="gauge-bg" cx="50" cy="50" r="45"></circle>
+          <circle id="gaugeFill" class="gauge-fill" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="score-inner">
+          <div id="scoreVal" class="score-number">--</div>
+          <div class="score-sub">Trust Index</div>
+        </div>
+      </div>
+
+      <div class="badge-wrapper">
+        <div id="ownershipBadge" class="badge">
+          <span id="badgeText">Evaluating...</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="summaryReason" class="summary-box">--</div>
+
+    <div class="flags-header">Audited Factors</div>
+    <div id="flagsList"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
